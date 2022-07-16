@@ -1,0 +1,27 @@
+
+
+{% extends 'blog/base.html' %}
+{% block content %}
+
+{% for i in post %}
+
+<article class="post">
+    <time class="date">
+        {{ i.published_date }}
+    </time>
+</article>
+{% if i.category %}
+Category: <a href="{% url 'blog:category_detail' i.category.slug %}">{{i.category.name}}</a>
+{% endif %}
+<aside style="display: flex;">
+    <img src="{{ i.thumbnailimage.url }}"  alt="{{i.title}}" height="60" width="60" style="border-radius: 50%;"/>
+    <h2 style="    margin-left: 20px;"><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></h2>
+</aside>
+        <p style="    margin-left: 17px;
+        margin-top: 12px;">{{ i.text|linebreaksbr }}</p>
+{% for tag in i.tag.all %}
+        Tag: <a href="{% url 'blog:tag_detail' tag.slug %}">{{tag.tname}}</a>
+{% endfor %}
+{% endfor %}
+{% endblock %}
+

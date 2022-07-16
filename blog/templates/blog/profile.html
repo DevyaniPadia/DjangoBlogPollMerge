@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+{% block title %}Profile Page{% endblock title %}
+{% block content %}
+<img src="{{ user.profile_img.url }}" alt="no img" width="150" height="150" style="border-radius: 50%;">
+    <h2>Username - {{user.username }}</h2>
+    <h2>Firstname - {{user.first_name }}</h2>
+    <h2>Lastname - {{user.last_name }}</h2>
+    <h2>Email - {{user.email  }}</h2>
+    <h2>City - {{user.city }}</h2>
+    <h2>State - {{user.state }}</h2>
+    <h2>Country - {{user.country }}</h2>
+    <h2>Mobile No. - {{user.mobile_no }}</h2>
+    <button type="submit" value="update" name="update" class="btn btn-primary"><a href="{% url 'update' %}" style="color: white; text-decoration:none;">Update</a></button>
+
+{% endblock content %}

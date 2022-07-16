@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+{% block title %} New Tag {% endblock %}
+
+{% block content %}
+{% for i in tag %}
+    <article class="tag">
+
+        <time class="date">
+            {{ i.published_date }}
+        </time>
+        <h2>{{ i.tname }}</h2>
+        <p>{{ i.text|linebreaksbr }}</p>
+    </article>
+{% endfor %}
+
+{% endblock %}
+

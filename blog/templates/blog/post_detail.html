@@ -1,0 +1,57 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+<div class="card-body">
+    <h1>{% block title %}
+        <aside class="actions">
+            <a class="btn btn-secondary" href="{% url 'blog:post_edit' slug=post.slug %}">
+                {% include './Icons/pencil-fill.svg' %}
+            </a>
+        </aside>
+        
+        <img src="{{ post.thumbnailimage.url }}"  alt="{{post.title}}" height="60" width="60" style="border-radius: 50%;">
+                {{ post.title }}
+                {% endblock title %}</h1>
+                <img src="{{ post.featureimage.url }}"  alt="{{post.title}}" height="100" width="100" style="border-radius: 50%;">
+                <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
+                <p class="card-text ">{{ post.text | safe }}</p>
+                <p class="card-text ">{{ post.tags }}</p>
+          
+        </div>
+      <!-- Comments Form --> 
+      <h2>Add a new comment</h2>
+      <form method="post">
+          {{ comment_form.as_p }}
+          {% csrf_token %}
+          <button type="submit">Add comment</button>
+      </form>
+      
+      <!-- Comment with nested comments -->
+      {% for comment in comments %}
+          <div class="comment">
+              <p class="info">{{ comment.name }} | {{ comment.created }}</p>
+              {{ comment.body|linebreaks }}
+      
+              {% for replay in comment.replies.all %}
+                  <p class="info">{{ replay.name }} | {{ replay.created }}</p>
+                  <li>{{ replay.body }}</li>
+              {% endfor %}
+              <button>Reply</button>
+        <reply>
+              <h5>Replay</h5>
+              <form method="post">
+                  {{ comment_form.as_p }}
+                  {% csrf_token %}
+                  <!-- Hidden input for parent comment.id -->
+                  <input type="hidden" name="reply_id" value="{{ comment.id }}">
+                  <input class="btn btn-primary" type="submit" value="Replay">
+                </form>
+            </div>
+            {% empty %}
+            <h4>There are no comments yet.</h4>
+            {% endfor %}
+        </reply>
+
+      {% endblock %}
+  
+      

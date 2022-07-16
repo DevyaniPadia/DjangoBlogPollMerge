@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+{% block title %} New Category {% endblock %}
+
+{% block content %}
+{% for cat in category %}
+    <article class="category">
+
+        <time class="date">
+            {{ post.published_date }}
+        </time>
+        <h2>{{ cat.name }}</h2>
+        <p>{{ cat.text|linebreaksbr }}</p>
+    </article>
+{% endfor %}
+
+{% endblock %}

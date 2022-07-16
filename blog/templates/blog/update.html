@@ -1,0 +1,9 @@
+{% extends "blog/base.html" %}
+<h1>Update Profile Page</h1>
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">SAVE</button>
+</form>
+{% endblock content %}

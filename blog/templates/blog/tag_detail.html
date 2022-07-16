@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+{% for i in post %}
+<article class="post">
+    <time class="date">
+        {{ i.published_date }}
+    </time>
+</article>
+{% for tag in tags %}
+Tag: {{i.tag.tname}}
+{% endfor %}
+<aside style="display: flex;">
+
+    <h2 style="    margin-left: 20px;">{{ i.title }}</h2>
+</aside>
+<p style="    margin-left: 17px;
+        margin-top: 12px;">{{ i.text|linebreaksbr }}</p>
+
+
+{% endfor %}
+{% endblock %}
+<img src="{{ i.thumbnailimage.url }}" alt="{{i.title}}" height="60" width="60" style="border-radius: 50%;" />
